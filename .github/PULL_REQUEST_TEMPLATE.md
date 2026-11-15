@@ -1,9 +1,9 @@
-## Problem og endring
+## Problem and change
 
-Beskriv hva som utløste problemet og hvordan endringen løser det.
+Describe what caused the problem and how this change solves it.
 
-## Kontroll
+## Verification
 
-Beskriv relevante tester og eventuell manuell kontroll.
-Bruk bare syntetiske dokumenter; ikke legg ved personopplysninger eller hemmeligheter.
-Oppgi eventuelle nye avhengigheter, nettverkskall eller endringer i sikkerhetsmodellen.
+Describe the relevant tests and any manual checks.
+Only use synthetic documents; never attach personal data or secrets.
+List any new dependencies, network requests or changes to the security model.

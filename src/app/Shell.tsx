@@ -33,6 +33,22 @@ export function Header({
         >
           {view === 'about' ? t('nav.back') : t('nav.about')}
         </a>
+        {config.sourceUrl && (
+          <a
+            href={config.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            referrerPolicy="no-referrer"
+            className="btn-ghost !px-2 text-muted hover:text-fg"
+            title={t('nav.source')}
+            data-testid="nav-source"
+          >
+            <GitHubIcon className="h-[18px] w-[18px]" />
+            <span className="sr-only">
+              {t('nav.source')} {t('footer.newTab')}
+            </span>
+          </a>
+        )}
         <label className="sr-only" htmlFor="lang-select">
           {t('nav.language')}
         </label>
