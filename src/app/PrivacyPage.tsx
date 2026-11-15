@@ -1,6 +1,6 @@
 import { config } from '../config/app';
 import { useI18n, type MessageKey } from '../i18n';
-import { SupportLink } from './Shell';
+import { GitHubIcon, SupportLink } from './Shell';
 
 function List({ keys }: { keys: MessageKey[] }) {
   const { t } = useI18n();
@@ -37,23 +37,29 @@ export function PrivacyPage() {
         <h2 className="text-lg font-semibold">{t('about.encryption.title')}</h2>
         <p>{t('about.encryption.body')}</p>
       </section>
-      {(config.buyMeACoffeeUrl || config.sourceUrl) && (
+      {config.sourceUrl && (
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold">{t('about.source.title')}</h2>
+          <p>{t('about.source')}</p>
+          <a
+            href={config.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            referrerPolicy="no-referrer"
+            className="btn w-full justify-center no-underline sm:w-auto"
+            data-testid="about-source-link"
+          >
+            <GitHubIcon className="h-4 w-4" />
+            {t('about.source.link')}
+            <span className="sr-only"> {t('footer.newTab')}</span>
+          </a>
+        </section>
+      )}
+      {config.buyMeACoffeeUrl && (
         <section className="space-y-3">
           <h2 className="text-lg font-semibold">{t('about.support.title')}</h2>
-          {config.sourceUrl && (
-            <p>
-              {t('about.source')}{' '}
-              <a href={config.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">
-                {t('footer.license')}
-              </a>
-            </p>
-          )}
-          {config.buyMeACoffeeUrl && (
-            <>
-              <p className="text-muted">{t('footer.supportText')}</p>
-              <SupportLink />
-            </>
-          )}
+          <p className="text-muted">{t('footer.supportText')}</p>
+          <SupportLink />
         </section>
       )}
     </main>
