@@ -36,6 +36,7 @@ export const nb = {
   'nav.about': 'Om segl.',
   'nav.back': 'Tilbake til appen',
   'nav.language': 'Språk',
+  'nav.source': 'Kildekode på GitHub',
 
   'upload.title': 'Send en kopi, ikke originalen',
   'upload.lead': 'Lag en delingskopi med bare det mottakeren trenger. Sladd felt som ikke skal med, fjern skjult innhold og merk kopien med hvem den er til og hva den skal brukes til. Alt skjer i nettleseren din.',

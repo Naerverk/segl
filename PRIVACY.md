@@ -1,63 +1,66 @@
-# Personvern
+# Privacy
 
-**Kort fortalt:** segl. laster aldri opp dokumentene dine. Alt skjer lokalt i nettleseren på
-din enhet.
+**In short:** segl. never uploads your documents. Everything happens locally in the browser on
+your device.
 
-## Lokal behandling
+## Local processing
 
-- PDF-filen leses inn i nettleserens minne gjennom filvelgeren eller dra-og-slipp (File API).
-- Visning, rasterisering, vannmerking, sladding, flating og oppretting av ny PDF skjer i nettleseren
-  med PDF.js, pdf-lib og Canvas – på din enhet.
-- Den ferdige PDF-en lages i minnet og lastes ned via en lokal `blob:`-adresse.
-- Det finnes ingen server som tar imot dokumenter, ingen database og ingen brukerkontoer.
-- Appen bruker ingen analyseverktøy, sporing, informasjonskapsler (cookies), annonser eller
-  «session recording». (Om Buy Me a Coffee-knappen: se under.)
-- Dokumentinnhold, filnavn og passord logges ikke til konsollen og tas ikke med i feilmeldinger.
-- Originalfilens bytes beholdes ikke etter at dokumentet er åpnet. Når du lukker dokumentet, avbrytes
-  en eventuell pågående åpning, og appen slipper alle referanser til PDF.js-dokumentet og
-  forhåndsvisningene (object URLs tilbakekalles). Merk: dette er ikke kryptografisk sletting – det er
-  nettleseren og operativsystemet som bestemmer når minnet faktisk frigjøres, og de kan ha egne kopier
-  (f.eks. swap, krasjrapporter eller nedlastingsmappen).
-- Fanetittelen viser aldri filnavnet (det kan inneholde personopplysninger og havne i nettleserhistorikk
-  eller fanesynkronisering).
+- The PDF is read into the browser's memory through the file picker or drag and drop (File API).
+- Viewing, rasterising, watermarking, redaction, flattening and creating the new PDF all happen in
+  the browser with PDF.js, pdf-lib and Canvas, on your device.
+- The finished PDF is created in memory and downloaded through a local `blob:` URL.
+- There is no server that receives documents, no database and no user accounts.
+- The app uses no analytics, tracking, cookies, ads or session recording. (For the Buy Me a
+  Coffee button, see below.)
+- Document content, file names and passwords are never logged to the console or included in error
+  messages.
+- The original file's bytes are not kept after the document is opened. When you close the
+  document, any import in progress is cancelled and the app releases all references to the PDF.js
+  document and the previews (object URLs are revoked). Note: this is not cryptographic erasure.
+  The browser and operating system decide when memory is actually freed, and they may keep their
+  own copies (for example swap, crash reports or the downloads folder).
+- The tab title never shows the file name (it may contain personal data and end up in browser
+  history or tab sync).
 
-Påstanden «All behandling skjer lokalt i nettleseren. Filene dine lastes aldri opp.» kontrolleres av
-automatiske tester (`tests/e2e/privacy.spec.ts`) som overvåker all nettverkstrafikk under en
-fullstendig behandling og eksport. I tillegg hindrer en streng Content Security Policy
-(`connect-src 'self'`) at appen kan sende forespørsler til andre domener.
+The claim "All processing happens locally in your browser. Your files are never uploaded." is
+checked by automated tests (`tests/e2e/privacy.spec.ts`) that monitor all network traffic during
+a complete processing and export. In addition, a strict Content Security Policy
+(`connect-src 'self'`) prevents the app from sending requests to other domains.
 
-## Hva lagres i nettleseren
+## What is stored in the browser
 
-| Lagring | Innhold |
+| Storage | Contents |
 | --- | --- |
-| `localStorage` | Kun `segl.lang` (språkvalg). |
-| Cache Storage | Appens egne filer (HTML, JavaScript, CSS, ikoner og PDF.js-ressurser) slik at appen virker offline. Aldri dokumenter. |
-| IndexedDB | Ingen app-data. (Workbox kan bruke en intern database til egen bokføring.) |
-| Cookies, sessionStorage | Ingenting. |
+| `localStorage` | Only `segl.lang` (language choice). |
+| Cache Storage | The app's own files (HTML, JavaScript, CSS, icons and PDF.js resources) so the app works offline. Never documents. |
+| IndexedDB | No app data. (Workbox may use an internal database for its own bookkeeping.) |
+| Cookies, sessionStorage | Nothing. |
 
-Dokumenter, filnavn, passord, vannmerketekster (mottaker/formål) og sladdeområder lagres aldri.
+Documents, file names, passwords, watermark texts (recipient/purpose) and redaction areas are
+never stored.
 
-## Nettverkstrafikk
+## Network traffic
 
-Den eneste trafikken er nedlasting av selve appen fra samme domene ved første besøk og ved
-oppdateringer. PDF.js henter CMaps, standardfonter og wasm-dekodere fra samme domene – dette er
-statiske filer som er like for alle, og forespørslene inneholder ingen dokumentdata. Etter første
-besøk fungerer appen helt uten nett.
+The only traffic is downloading the app itself from the same domain on the first visit and on
+updates. PDF.js loads CMaps, standard fonts and wasm decoders from the same domain. These are
+static files that are the same for everyone, and the requests contain no document data. After
+the first visit the app works fully offline.
 
-## Eksterne lenker og Buy Me a Coffee
+## External links and Buy Me a Coffee
 
-- Lenken «Støtt utviklingen» i bunnteksten og eventuell kildekodelenke er vanlige lenker. Ingenting lastes
-  fra disse tjenestene før du klikker. De åpnes i ny fane uten referrer.
-- **Etter at en PDF er laget** vises den offisielle «Buy me a coffee»-knappen. Den hentes fra
-  `cdnjs.buymeacoffee.com` og Google Fonts. Knappen kjører i en isolert sandkasse (egen ramme uten
-  tilgang til appen), så den kan ikke se dokumentet, forhåndsvisningene eller noe annet i appen.
-  Buy Me a Coffee og Google mottar bare det enhver nettside mottar: IP-adresse, nettleser og tidspunkt.
-  Ingen referrer sendes. Knappen lastes først når en PDF er ferdig eksportert. Dokumentet kan da
-  fortsatt være åpent i appen, men rammen har ingen tilgang til det.
-- Lenker inne i PDF-dokumenter er ikke klikkbare i forhåndsvisningen (sidene tegnes som bilder).
+- The "Support development" link in the footer and the source code links are ordinary links.
+  Nothing is loaded from these services until you click. They open in a new tab without a
+  referrer.
+- **After a PDF has been created**, the official "Buy me a coffee" button is shown. It is loaded
+  from `cdnjs.buymeacoffee.com` and Google Fonts. The button runs in an isolated sandbox (a
+  separate frame with no access to the app), so it cannot see the document, the previews or
+  anything else in the app. Buy Me a Coffee and Google only receive what any website receives:
+  IP address, browser and time. No referrer is sent. The button is loaded only once a PDF has been
+  exported. The document may still be open in the app, but the frame has no access to it.
+- Links inside PDF documents are not clickable in the preview (pages are drawn as images).
 
-## Vertstjenesten
+## Hosting
 
-Selve nettsiden leveres av en statisk vert (Cloudflare Pages).
-Slike verter kan, som alle webservere, registrere tekniske data om forespørsler etter appens filer
-(IP-adresse, tidspunkt, nettleser). De mottar aldri dokumentene dine.
+The site is served by a static host (Cloudflare Pages). Like any web server, the host may record
+technical data about requests for the app's files (IP address, time, browser). It never receives
+your documents.

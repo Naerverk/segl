@@ -33,6 +33,7 @@ export const en: Messages = {
   'nav.about': 'About segl.',
   'nav.back': 'Back to the app',
   'nav.language': 'Language',
+  'nav.source': 'Source code on GitHub',
 
   'upload.title': 'Send a copy, not the original',
   'upload.lead': 'Make a sharing copy with only what the recipient needs. Redact fields that should not be included, remove hidden content and mark the copy with who it is for and what it is for. Everything happens in your browser.',

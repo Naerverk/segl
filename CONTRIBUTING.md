@@ -1,25 +1,27 @@
-# Bidra til segl.
+# Contributing to segl.
 
-Repo: [Naerverk/segl](https://github.com/Naerverk/segl).
-Alle kan foreslå endringer via en fork og pull request. Bare vedlikeholdere merger og publiserer.
-Vi vurderer bidrag etter kapasitet; vi lover ikke svartid eller at forslag blir tatt inn.
-Avklar større funksjoner i et issue før du starter. Små feilrettinger kan sendes direkte.
+Repository: [Naerverk/segl](https://github.com/Naerverk/segl).
+Anyone can propose changes through a fork and a pull request. Only maintainers merge and deploy.
+Contributions are reviewed as capacity allows; there is no promise of response time or that a
+proposal will be accepted. Please discuss larger features in an issue before you start. Small
+fixes can be sent directly.
 
-## Lokal utvikling
+## Local development
 
-Bruk Node.js-versjonen i `.nvmrc`, kjør `npm ci` og `npm run dev`.
-Hold PR-er små og beskriv problemet, endringen og hvordan den er kontrollert.
-Kjør `npm run typecheck`, `npm test` og `npm run build`.
-Ved endringer i dokumentbehandling, personvern eller brukerflyt: installer Chromium med
-`npx playwright install chromium` og kjør `npm run test:e2e`.
-Legg til relevante regresjonstester ved feilrettinger.
+Use the Node.js version in `.nvmrc`, then run `npm ci` and `npm run dev`.
+Keep pull requests small and describe the problem, the change and how it was verified.
+Run `npm run typecheck`, `npm test` and `npm run build`.
+For changes to document processing, privacy or the user flow, install Chromium with
+`npx playwright install chromium` and run `npm run test:e2e`.
+Add regression tests for bug fixes.
 
-## Dokumenter og sikkerhet
+## Documents and security
 
-Bruk bare syntetiske testfiler. Ikke legg ved legitimasjon, personopplysninger, passord,
-API-nøkler eller ekte brukerdokumenter i issues, PR-er, skjermbilder eller logger.
-Rapporter sårbarheter privat som beskrevet i [SECURITY.md](SECURITY.md).
-Endringer må ivareta lokal dokumentbehandling, permanent sladding og eksplisitte feil ved
-ufullstendig rendering. Nye nettverkskall og avhengigheter må begrunnes.
+Only use synthetic test files. Never attach ID documents, personal data, passwords, API keys or
+real user documents to issues, pull requests, screenshots or logs.
+Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
+Changes must preserve local document processing, permanent redaction and explicit errors on
+incomplete rendering. New network requests and dependencies must be justified.
 
-Bidrag leveres under prosjektets [MIT-lisens](LICENSE). Vis hensyn og hold diskusjoner saklige.
+Contributions are made under the project's [MIT license](LICENSE). Be considerate and keep
+discussions on topic.

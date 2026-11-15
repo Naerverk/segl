@@ -1,14 +1,14 @@
 ---
-name: Feilrapport
-about: Meld en feil med en syntetisk reproduksjon
+name: Bug report
+about: Report a bug with a synthetic reproduction
 ---
 
-Ikke legg ved ekte dokumenter eller personopplysninger. Sårbarheter rapporteres privat, se SECURITY.md.
+Do not attach real documents or personal data. Report vulnerabilities privately, see SECURITY.md.
 
-**Hva skjedde, og hva forventet du?**
+**What happened, and what did you expect?**
 
-**Steg for å gjenskape**
+**Steps to reproduce**
 
-**Nettleser, operativsystem og versjon av segl.**
+**Browser, operating system and version of segl.**
 
-**Eventuell syntetisk testfil eller skjermbilde**
+**Synthetic test file or screenshot, if any**
