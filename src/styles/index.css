@@ -1,0 +1,156 @@
+@import 'tailwindcss';
+
+
+/* Quiet, dark Scandinavian palette. Contrast of fg/bg and muted/bg meets WCAG AA. */
+:root {
+  --pp-bg: #131416;
+  --pp-surface: #1b1c1f;
+  --pp-sunken: #0f1012;
+  --pp-fg: #ebebe7;
+  --pp-muted: #a6abb2;
+  --pp-border: #2f3136;
+  --pp-accent: #9dbbdc;
+  --pp-accent-fg: #0f1a26;
+  --pp-accent-soft: #1f2b38;
+  --pp-warn: #f0c16e;
+  --pp-warn-soft: #2d2412;
+  --pp-danger: #f19a8f;
+  --pp-danger-soft: #34191a;
+  --pp-ok: #8fd19e;
+  --pp-ok-soft: #16271b;
+  --pp-focus: #7fb0ff;
+  color-scheme: dark;
+}
+
+
+
+@theme inline {
+  --color-bg: var(--pp-bg);
+  --color-surface: var(--pp-surface);
+  --color-sunken: var(--pp-sunken);
+  --color-fg: var(--pp-fg);
+  --color-muted: var(--pp-muted);
+  --color-line: var(--pp-border);
+  --color-accent: var(--pp-accent);
+  --color-accent-fg: var(--pp-accent-fg);
+  --color-accent-soft: var(--pp-accent-soft);
+  --color-warn: var(--pp-warn);
+  --color-warn-soft: var(--pp-warn-soft);
+  --color-danger: var(--pp-danger);
+  --color-danger-soft: var(--pp-danger-soft);
+  --color-ok: var(--pp-ok);
+  --color-ok-soft: var(--pp-ok-soft);
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+  /* On small screens the document scrolls normally. From md and up the app shell fills the
+     viewport and only its inner regions scroll. */
+  @media (min-width: 48rem) {
+    html,
+    body,
+    #root {
+      height: 100%;
+    }
+    html,
+    body {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+  }
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  :focus-visible {
+    outline: 2px solid var(--pp-focus);
+    outline-offset: 2px;
+  }
+  input[type='range'] {
+    accent-color: var(--pp-accent);
+  }
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--pp-accent);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-line bg-surface px-3 py-1.5 text-sm font-medium text-fg hover:bg-sunken disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-accent px-4 py-2 text-sm font-semibold text-accent-fg hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-icon {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-md border border-line bg-surface text-fg hover:bg-sunken disabled:opacity-40;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-sm text-muted hover:bg-sunken hover:text-fg;
+  }
+  .panel {
+    @apply rounded-lg border border-line bg-surface;
+  }
+  .field-label {
+    @apply mb-1 block text-sm font-medium text-fg;
+  }
+  .input {
+    @apply w-full rounded-md border border-line bg-surface px-2.5 py-1.5 text-sm text-fg placeholder:text-muted;
+  }
+  .note {
+    @apply rounded-md px-3 py-2 text-sm leading-snug;
+  }
+  .note-warn {
+    @apply rounded-md px-3 py-2 text-sm leading-snug bg-warn-soft text-fg;
+    border-left: 3px solid var(--pp-warn);
+  }
+  .note-info {
+    @apply rounded-md px-3 py-2 text-sm leading-snug bg-accent-soft text-fg;
+    border-left: 3px solid var(--pp-accent);
+  }
+  .note-danger {
+    @apply rounded-md px-3 py-2 text-sm leading-snug bg-danger-soft text-fg;
+    border-left: 3px solid var(--pp-danger);
+  }
+  .note-ok {
+    @apply rounded-md px-3 py-2 text-sm leading-snug bg-ok-soft text-fg;
+    border-left: 3px solid var(--pp-ok);
+  }
+  .segmented {
+    @apply inline-flex rounded-md border border-line bg-sunken p-0.5;
+  }
+  .segmented > button {
+    @apply rounded px-2.5 py-1 text-sm text-muted;
+  }
+  .segmented > button[aria-pressed='true'] {
+    @apply bg-surface font-medium text-fg shadow-sm;
+  }
+  .checker {
+    background-color: var(--pp-sunken);
+  }
+  .redaction-box {
+    background: repeating-linear-gradient(
+      135deg,
+      rgb(0 0 0 / 0.55) 0 6px,
+      rgb(0 0 0 / 0.35) 6px 12px
+    );
+    outline: 2px solid #e11d48;
+    outline-offset: -1px;
+  }
+  .redaction-box.is-white {
+    background: repeating-linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.8) 0 6px,
+      rgb(220 220 220 / 0.7) 6px 12px
+    );
+  }
+  .redaction-box.is-burnt {
+    background: transparent;
+  }
+}
