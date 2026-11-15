@@ -211,5 +211,7 @@ export const en: Messages = {
   'about.encryption.title': 'Password on the PDF',
   'about.encryption.body': 'You cannot add one with segl. yet. We would rather wait than ship something we are not sure works.',
   'about.support.title': 'Support',
-  'about.source': 'The source code is open, so anyone can see what the app does.',
+  'about.source.title': 'Open source',
+  'about.source': 'The source code is open, so anyone can see what the app does and build it themselves. Licence: MIT.',
+  'about.source.link': 'View the code on GitHub',
 };

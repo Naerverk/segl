@@ -214,7 +214,9 @@ export const nb = {
   'about.encryption.title': 'Passord på PDF-en',
   'about.encryption.body': 'Det kan du ikke legge på med segl. ennå. Vi venter heller enn å lage noe vi ikke er sikre på at virker.',
   'about.support.title': 'Støtte',
-  'about.source': 'Kildekoden er åpen, så hvem som helst kan se hva appen gjør.',
+  'about.source.title': 'Åpen kildekode',
+  'about.source': 'Kildekoden er åpen, så hvem som helst kan se hva appen gjør og bygge den selv. Lisens: MIT.',
+  'about.source.link': 'Se koden på GitHub',
 } as const;
 
 export type MessageKey = keyof typeof nb;
