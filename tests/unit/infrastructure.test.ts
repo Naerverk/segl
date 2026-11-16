@@ -4,7 +4,7 @@ import { UrlCache } from '../../src/lib/urlCache';
 import { calibrate, estimateOutputSize, heuristicBitsPerPixel } from '../../src/pdf/estimate';
 import { looksLikePdf } from '../../src/pdf/sniff';
 import { safeExternalUrl } from '../../src/config/app';
-import { CONTENT_SECURITY_POLICY } from '../../src/config/csp';
+import { CONTENT_SECURITY_POLICY, contentSecurityPolicy, shareOrigin } from '../../src/config/csp';
 
 describe('TaskQueue', () => {
   it('runs one task at a time, highest priority first', async () => {
@@ -78,6 +78,20 @@ describe('misc', () => {
     expect(CONTENT_SECURITY_POLICY).toContain("default-src 'none'");
     expect(CONTENT_SECURITY_POLICY).toContain("connect-src 'self'");
     expect(CONTENT_SECURITY_POLICY).not.toMatch(/'unsafe-eval'|unsafe-inline|https?:/);
+  });
+  it('with a one-time-link server, only connect-src gains exactly that origin', () => {
+    const csp = contentSecurityPolicy(shareOrigin('https://hemmelig.example/some/path?x=1'));
+    const directives = Object.fromEntries(csp.split('; ').map((d) => [d.split(' ')[0], d]));
+    expect(directives['connect-src']).toBe("connect-src 'self' https://hemmelig.example");
+    for (const [name, d] of Object.entries(directives)) if (name !== 'connect-src') expect(d, name).not.toMatch(/https?:/);
+    expect(csp).not.toMatch(/'unsafe-eval'|unsafe-inline/);
+  });
+  it('only accepts an https one-time-link server', () => {
+    expect(shareOrigin('https://hemmelig.naerverk.no')).toBe('https://hemmelig.naerverk.no');
+    expect(shareOrigin('http://hemmelig.naerverk.no')).toBeNull();
+    expect(shareOrigin('javascript:alert(1)')).toBeNull();
+    expect(shareOrigin('')).toBeNull();
+    expect(shareOrigin(undefined)).toBeNull();
   });
 });
 

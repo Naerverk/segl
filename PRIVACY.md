@@ -14,6 +14,9 @@ your device.
   Coffee button, see below.)
 - Document content, file names and passwords are never logged to the console or included in error
   messages.
+- Password protection of the copy also happens in the browser. segl. does not store the
+  password; it is gone when you close the document. If you copy it, it is in your clipboard like
+  any other copied text.
 - The original file's bytes are not kept after the document is opened. When you close the
   document, any import in progress is cancelled and the app releases all references to the PDF.js
   document and the previews (object URLs are revoked). Note: this is not cryptographic erasure.
@@ -25,7 +28,8 @@ your device.
 The claim "All processing happens locally in your browser. Your files are never uploaded." is
 checked by automated tests (`tests/e2e/privacy.spec.ts`) that monitor all network traffic during
 a complete processing and export. In addition, a strict Content Security Policy
-(`connect-src 'self'`) prevents the app from sending requests to other domains.
+(`connect-src`) only allows requests to the app's own domain and, if configured, the one-time-link
+server described below.
 
 ## What is stored in the browser
 
@@ -43,6 +47,13 @@ The only traffic is downloading the app itself from the same domain. The PDF eng
 pdf-lib) is downloaded when you open a file, and PDF.js loads CMaps, standard fonts and wasm
 decoders from the same domain when a document needs them. These are static files that are the
 same for everyone, and the requests contain no document data.
+
+**One-time link for the password (optional).** If you click *Create one-time link*, the password
+is encrypted in your browser and the encrypted version is sent to the configured one-time-link
+server (for segl.naerverk.no: hemmelig.naerverk.no). That server stores only the encrypted
+password, until the link has been opened once or expires; like any web server it sees your IP
+address. The key needed to decrypt it is part of the link and never sent. The document, its file
+name and its contents are never sent. Without that click, the app sends nothing at all.
 
 ## External links and Buy Me a Coffee
 

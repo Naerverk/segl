@@ -25,14 +25,24 @@ it. Watermarks make misuse harder, not impossible.
   stops the export.
 - **Resource limits:** at most 300 MB per file, 2000 pages and a 16 MP canvas per page (the DPI is
   lowered automatically).
-- **Strict CSP:** `default-src 'none'`, everything else only from `'self'`. See
-  `src/config/csp.ts`.
+- **Password protection (optional).** The copy is encrypted with AES-256 (PDF 2.0, revision 6)
+  using qpdf compiled to WebAssembly, in a Web Worker in the browser. segl. suggests a random
+  password of 20 characters (about 99 bits). The password is not stored.
+- **One-time link for the password (optional).** Only when the user clicks the button: the
+  password is encrypted in the browser with OpenPGP, exactly like the Yopass web app, and only
+  the ciphertext is sent to the configured server (`VITE_SECRET_SHARE_URL`). The key is in the
+  part of the link after `#`, which never reaches the server. The document is never sent.
+- **Strict CSP:** `default-src 'none'`, everything else only from `'self'`. The only other
+  origin `connect-src` can allow is the configured one-time-link server. See `src/config/csp.ts`.
 
 ## Limitations
 
 - Text in the result cannot be searched, copied or read by screen readers.
 - A digital signature is not carried over to the new PDF. The app warns about signed documents.
-- Encrypting the output file is not supported.
+- A password protects the file in transit. Once the recipient has opened it, the content can be
+  saved and shared like any other file. Very old PDF readers may not support AES-256.
+- Anyone who gets both the file and the password can open it: send them through different
+  channels.
 - XFA forms are not supported.
 - A correct result depends on PDF.js rendering the page correctly. Always check the preview.
 

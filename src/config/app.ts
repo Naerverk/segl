@@ -15,4 +15,9 @@ export const config = {
   buyMeACoffeeUrl: safeExternalUrl(import.meta.env.VITE_BUYMEACOFFEE_URL as string | undefined),
   /** Public source repository; optionally overridden at build time. */
   sourceUrl: safeExternalUrl(import.meta.env.VITE_SOURCE_URL as string | undefined) ?? 'https://github.com/Naerverk/segl',
+  /**
+   * Yopass server for one-time password links (VITE_SECRET_SHARE_URL), e.g. https://hemmelig.naerverk.no.
+   * Empty = the option is hidden and the app never contacts any other server.
+   */
+  secretShareUrl: safeExternalUrl(import.meta.env.VITE_SECRET_SHARE_URL as string | undefined),
 };

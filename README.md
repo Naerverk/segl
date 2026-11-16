@@ -29,7 +29,10 @@ App: [segl.naerverk.no](https://segl.naerverk.no) (Norwegian and English)
 - Watermark with recipient, purpose and date.
 - Two modes per page: **Standard** (150 DPI) and **High detail** (200 DPI or more).
 - Preview rendered by the same code as the export.
-- Password-protected PDFs (the password is never stored).
+- Opens password-protected PDFs (the password is never stored).
+- Optional password protection of the copy: AES-256, with a suggested strong password.
+- Optional one-time link for the password via a [Yopass](https://github.com/jhaals/yopass)
+  server. Only the password is sent, encrypted in the browser; the document never is.
 - Small download: the start page is about 90 KB; the PDF engine is only loaded when a file is opened.
 
 See [SECURITY.md](SECURITY.md) for the security model and limitations, and
@@ -62,6 +65,7 @@ Copy `.env.example` to `.env`. The values are embedded at build time and are not
 | `VITE_BUYMEACOFFEE_URL` | Buy Me a Coffee page (`https://`). Empty = no link or button. |
 | `VITE_SOURCE_URL` | Link to the source code (default: https://github.com/Naerverk/segl). |
 | `VITE_BASE` | Base path when hosted in a subfolder (default `/`). |
+| `VITE_SECRET_SHARE_URL` | Yopass server for one-time password links, e.g. `https://hemmelig.naerverk.no`. Empty = the option is hidden and the app contacts no other server. |
 
 ## Deployment
 
@@ -74,7 +78,8 @@ are listed in `.github/workflows/deploy-cloudflare.yml`.
 
 ## Technology
 
-React, TypeScript, Vite, Tailwind CSS, PDF.js, pdf-lib, Vitest and Playwright.
+React, TypeScript, Vite, Tailwind CSS, PDF.js, pdf-lib, qpdf (WebAssembly), OpenPGP.js, Vitest and
+Playwright.
 
 ## License
 

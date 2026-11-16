@@ -23,7 +23,7 @@ export function PrivacyPage() {
       </header>
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">{t('about.limits.title')}</h2>
-        <List keys={['about.limits.1', 'about.limits.2', 'about.limits.3', 'about.limits.4', 'about.limits.5', 'about.limits.6', 'about.limits.7']} />
+        <List keys={['about.limits.1', 'about.limits.2', 'about.limits.3', 'about.limits.4', 'about.limits.5', 'about.limits.6', 'about.limits.7', 'about.limits.8']} />
       </section>
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">{t('about.how.title')}</h2>
@@ -36,6 +36,7 @@ export function PrivacyPage() {
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">{t('about.encryption.title')}</h2>
         <p>{t('about.encryption.body')}</p>
+        {config.secretShareUrl && <p>{t('about.encryption.link', { host: new URL(config.secretShareUrl).host })}</p>}
       </section>
       {config.sourceUrl && (
         <section className="space-y-3">
