@@ -8,8 +8,6 @@ import { fileURLToPath } from 'node:url';
 const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'icons');
 const targets = [
   { svg: 'icon.svg', out: 'icon-192.png', size: 192 },
-  { svg: 'icon.svg', out: 'icon-512.png', size: 512 },
-  { svg: 'icon-maskable.svg', out: 'icon-maskable-512.png', size: 512 },
 ];
 
 const browser = await chromium.launch();

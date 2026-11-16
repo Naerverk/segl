@@ -32,19 +32,17 @@ a complete processing and export. In addition, a strict Content Security Policy
 | Storage | Contents |
 | --- | --- |
 | `localStorage` | Only `segl.lang` (language choice). |
-| Cache Storage | The app's own files (HTML, JavaScript, CSS, icons and PDF.js resources) so the app works offline. Never documents. |
-| IndexedDB | No app data. (Workbox may use an internal database for its own bookkeeping.) |
-| Cookies, sessionStorage | Nothing. |
+| Cache Storage, IndexedDB, cookies, sessionStorage | Nothing. There is no service worker and no offline cache. |
 
 Documents, file names, passwords, watermark texts (recipient/purpose) and redaction areas are
 never stored.
 
 ## Network traffic
 
-The only traffic is downloading the app itself from the same domain on the first visit and on
-updates. PDF.js loads CMaps, standard fonts and wasm decoders from the same domain. These are
-static files that are the same for everyone, and the requests contain no document data. After
-the first visit the app works fully offline.
+The only traffic is downloading the app itself from the same domain. The PDF engine (PDF.js and
+pdf-lib) is downloaded when you open a file, and PDF.js loads CMaps, standard fonts and wasm
+decoders from the same domain when a document needs them. These are static files that are the
+same for everyone, and the requests contain no document data.
 
 ## External links and Buy Me a Coffee
 

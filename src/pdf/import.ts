@@ -1,4 +1,5 @@
 import type { DocumentInspection, PageInfo } from '../models/types';
+import { ImportError, MAX_FILE_BYTES, MAX_PAGES } from './importBase';
 import { inspectDocument, readPageInfos } from './inspect';
 import { PDFJS_DOCUMENT_OPTIONS, pdfjs, type PDFDocumentProxy } from './pdfjs';
 import { PreflightAbortedError, PreflightTimeoutError, runPreflight } from './preflightClient';
@@ -6,27 +7,8 @@ import { looksLikePdf } from './sniff';
 
 export { looksLikePdf };
 
-export const MAX_FILE_BYTES = 300 * 1024 * 1024;
-export const MAX_PAGES = 2000;
-
-export type ImportErrorCode =
-  | 'not-pdf'
-  | 'too-large'
-  | 'too-many-pages'
-  | 'image-too-large'
-  | 'too-complex'
-  | 'invalid'
-  | 'password-cancelled'
-  | 'read-failed'
-  | 'cancelled';
-
-export class ImportError extends Error {
-  constructor(public readonly code: ImportErrorCode) {
-    // Never include document contents or file names in error messages.
-    super(`PDF import failed: ${code}`);
-    this.name = 'ImportError';
-  }
-}
+export { ImportError, MAX_FILE_BYTES, MAX_PAGES };
+export type { ImportErrorCode } from './importBase';
 
 /**
  * The opened document. The original bytes are NOT kept: after import only PDF.js holds the

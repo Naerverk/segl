@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { DocumentUpload } from '../components/DocumentUpload/DocumentUpload';
 import { PasswordDialog } from '../components/DocumentUpload/PasswordDialog';
 import { Dialog } from '../components/Dialog';
-import { Workspace } from '../components/Workspace/Workspace';
 import { useDocumentController } from '../hooks/useDocumentController';
 import { I18nProvider, useI18n } from '../i18n';
 import { PrivacyPage } from './PrivacyPage';
 import { Footer, Header } from './Shell';
-import { UpdatePrompt } from './UpdatePrompt';
+
+// The workspace (preview, redaction, export with pdf-lib) is only downloaded once a file is open.
+const Workspace = lazy(() => import('../components/Workspace/Workspace').then((m) => ({ default: m.Workspace })));
 
 type View = 'app' | 'about';
 const viewFromHash = (): View => (/^#\/(personvern|privacy|about)/.test(window.location.hash) ? 'about' : 'app');
@@ -48,7 +49,9 @@ function AppInner() {
         {/* The workspace stays mounted while reading the privacy page, so nothing is lost. */}
         <div className={view === 'app' ? 'flex flex-1 flex-col md:min-h-0' : 'hidden'}>
           {status === 'ready' && session && controller.signatureAcknowledged ? (
-            <Workspace controller={controller} session={session} />
+            <Suspense fallback={null}>
+              <Workspace controller={controller} session={session} />
+            </Suspense>
           ) : (
             <main id="main" className="flex-1">
               <DocumentUpload controller={controller} />
@@ -74,7 +77,6 @@ function AppInner() {
           </button>
         </div>
       </Dialog>
-      <UpdatePrompt />
     </div>
   );
 }

@@ -16,7 +16,6 @@ export const CONTENT_SECURITY_POLICY = [
   "img-src 'self' blob: data:",
   "font-src 'self' data:",
   "connect-src 'self'",
-  "manifest-src 'self'",
   "base-uri 'none'",
   "form-action 'none'",
   "object-src 'none'",

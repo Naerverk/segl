@@ -1,5 +1,5 @@
 // Copies the pdf.js runtime resources (CMaps, standard fonts, wasm decoders, ICC profiles)
-// into public/pdfjs so they are served from our own origin and precached for offline use.
+// into public/pdfjs so they are served from our own origin (loaded only when a PDF needs them).
 import { cpSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';

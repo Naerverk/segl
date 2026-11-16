@@ -186,11 +186,6 @@ export const nb = {
   'footer.license': 'Kildekode på GitHub (MIT)',
   'footer.newTab': '(åpnes i ny fane)',
 
-  'pwa.update': 'En ny versjon av segl. er tilgjengelig.',
-  'pwa.reload': 'Oppdater',
-  'pwa.dismiss': 'Senere',
-  'pwa.offlineReady': 'segl. kan nå brukes uten nett.',
-  'pwa.ok': 'OK',
 
   'about.title': 'Om segl.',
   'about.lead': 'segl. er et lite verktøy for å lage en delingskopi av en PDF – for eksempel en kopi av førerkortet til en bilforhandler. Det nyttigste er sladding: det du fjerner, finnes ikke i kopien. I tillegg kan kopien merkes med mottaker og formål.',
@@ -200,7 +195,6 @@ export const nb = {
   'about.how.3': 'Den nye PDF-en lastes ned rett fra nettleseren.',
   'about.how.4': 'Det er ingen innlogging, ingen database og ingen sporing. Når du har laget en PDF, dukker det opp en Buy Me a Coffee-knapp. Den hentes fra Buy Me a Coffee, men kjører helt adskilt fra dokumentet ditt.',
   'about.how.5': 'Ingenting fra dokumentet lagres. Lukker du det eller fanen, er det borte fra appen. Det eneste som huskes, er språket du har valgt.',
-  'about.how.6': 'Etter første besøk virker appen også uten nett.',
   'about.limits.title': 'Dette bør du vite før du deler',
   'about.limits.1': 'segl. gjør ikke delingen trygg. Det du lar være synlig, kan mottakeren lagre, kopiere og sende videre.',
   'about.limits.2': 'Vannmerket viser hva kopien er ment for, men hindrer ikke gjenbruk. Det kan fjernes eller dekkes over med litt innsats.',

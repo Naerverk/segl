@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 const PORT = 4173;
 
 /**
- * E2E tests run against the production build (`vite preview`), with the service worker and CSP
+ * E2E tests run against the production build (`vite preview`), with the CSP
  * exactly as deployed. A dummy support URL is configured so the link can be tested – it is
  * never requested.
  */

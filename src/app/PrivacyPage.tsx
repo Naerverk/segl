@@ -27,7 +27,7 @@ export function PrivacyPage() {
       </section>
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">{t('about.how.title')}</h2>
-        <List keys={['about.how.1', 'about.how.2', 'about.how.3', 'about.how.4', 'about.how.5', 'about.how.6']} />
+        <List keys={['about.how.1', 'about.how.2', 'about.how.3', 'about.how.4', 'about.how.5']} />
       </section>
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">{t('about.modes.title')}</h2>
