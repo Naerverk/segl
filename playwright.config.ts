@@ -28,6 +28,6 @@ export default defineConfig({
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
-    env: { VITE_BUYMEACOFFEE_URL: 'https://www.buymeacoffee.com/example' },
+    env: { VITE_BUYMEACOFFEE_URL: 'https://www.buymeacoffee.com/example', VITE_SECRET_SHARE_URL: 'https://hemmelig.example' },
   },
 });

@@ -49,6 +49,28 @@ export function collectThirdPartyLicenses(): LicenseEntry[] {
   return [...seen.values()].sort((a, b) => a.key.localeCompare(b.key));
 }
 
+// Components compiled into a package's binary whose licenses the package itself does not ship.
+// The texts live in licenses/<folder>/ and were taken from the exact upstream commits the
+// package is built from (see the package's Dockerfile).
+const BUNDLED: { title: string; folder: string; files: string[] }[] = [
+  {
+    title: 'qpdf 12.2.0, zlib and libjpeg-turbo – compiled into qpdf.wasm (@neslinesli93/qpdf-wasm)',
+    folder: 'qpdf-wasm',
+    files: ['qpdf-LICENSE.txt', 'qpdf-NOTICE.md', 'zlib-LICENSE.txt', 'libjpeg-turbo-LICENSE.md', 'libjpeg-turbo-README.ijg'],
+  },
+];
+
+function bundledNotices(): string[] {
+  return BUNDLED.map(({ title, folder, files }) => {
+    const texts = files.map((f) => {
+      const path = join(root, 'licenses', folder, f);
+      if (!existsSync(path)) throw new Error(`[licenses] missing bundled notice ${folder}/${f}`);
+      return `--- ${f} ---\n\n${readFileSync(path, 'utf8').trim()}\n`;
+    });
+    return `${'='.repeat(78)}\n${title}\n${'='.repeat(78)}\n\n${texts.join('\n')}`;
+  });
+}
+
 export function renderThirdPartyLicenses(): string {
   const entries = collectThirdPartyLicenses();
   const header = [
@@ -62,7 +84,12 @@ export function renderThirdPartyLicenses(): string {
     '/pdfjs/cmaps/LICENSE, /pdfjs/standard_fonts/LICENSE_FOXIT, /pdfjs/standard_fonts/LICENSE_LIBERATION,',
     '/pdfjs/wasm/LICENSE_*, /pdfjs/iccs/LICENSE.',
     '',
+    'OpenPGP.js (openpgp, LGPL-3.0-or-later) is used unmodified to encrypt passwords for one-time',
+    'links. It is shipped as its own file (assets/openpgp*.js), loaded only when a link is created,',
+    'and can be replaced with any compatible build. Source code for the exact version:',
+    'https://github.com/openpgpjs/openpgpjs/tree/v6.3.2',
+    '',
   ];
   const body = entries.map((e) => `${'='.repeat(78)}\n${e.key} – ${e.license}\n${'='.repeat(78)}\n\n${e.text}\n`);
-  return `${header.join('\n')}\n${body.join('\n')}`;
+  return `${header.join('\n')}\n${[...body, ...bundledNotices()].join('\n')}`;
 }
