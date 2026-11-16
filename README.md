@@ -6,7 +6,6 @@
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vite.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![PDF.js](https://img.shields.io/badge/PDF.js-E5252A)](https://mozilla.github.io/pdf.js/)
-[![PWA](https://img.shields.io/badge/PWA-5A0FC8?logo=pwa&logoColor=white)](https://web.dev/explore/progressive-web-apps)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 
 > [!NOTE]
@@ -31,7 +30,7 @@ App: [segl.naerverk.no](https://segl.naerverk.no) (Norwegian and English)
 - Two modes per page: **Standard** (150 DPI) and **High detail** (200 DPI or more).
 - Preview rendered by the same code as the export.
 - Password-protected PDFs (the password is never stored).
-- Installable PWA that works offline.
+- Small download: the start page is about 90 KB; the PDF engine is only loaded when a file is opened.
 
 See [SECURITY.md](SECURITY.md) for the security model and limitations, and
 [PRIVACY.md](PRIVACY.md) for privacy.
@@ -51,7 +50,7 @@ npm run build        # production build in dist/
 ```bash
 npm test                          # unit and integration tests
 npx playwright install chromium   # first time only
-npm run test:e2e                  # end-to-end, privacy and offline tests
+npm run test:e2e                  # end-to-end and privacy tests
 ```
 
 ## Configuration
@@ -75,7 +74,7 @@ are listed in `.github/workflows/deploy-cloudflare.yml`.
 
 ## Technology
 
-React, TypeScript, Vite, Tailwind CSS, PDF.js, pdf-lib, Workbox, Vitest and Playwright.
+React, TypeScript, Vite, Tailwind CSS, PDF.js, pdf-lib, Vitest and Playwright.
 
 ## License
 

@@ -1,14 +1,14 @@
 // Builds the license notice for all third-party code shipped in dist/ (third-party-licenses.txt).
-// Walks the runtime dependency tree from package.json, plus the Workbox modules bundled into the
-// service worker. The build fails if a package has no license file.
+// Walks the runtime dependency tree from package.json. The build fails if a package has no
+// license file.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-// Bundled by vite-plugin-pwa / workbox-build (dev dependencies, but shipped in sw.js / the app).
-const EXTRA = ['workbox-window', 'workbox-core', 'workbox-precaching', 'workbox-routing', 'workbox-strategies'];
+// Dev dependencies that are nevertheless bundled into the app (none at the moment).
+const EXTRA: string[] = [];
 // Node-only optional dependencies that never reach the browser bundle.
 const SKIP = new Set(['@napi-rs/canvas']);
 

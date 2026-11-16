@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
-    "types": ["vite/client", "vite-plugin-pwa/react", "node"],
+    "types": ["vite/client", "node"],
     "noEmit": true
   },
   "include": ["src", "tests", "vite.config.ts", "playwright.config.ts"]

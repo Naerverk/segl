@@ -2,7 +2,7 @@ import { FileUp, Loader2, ShieldCheck } from 'lucide-react';
 import { useId, useRef, useState } from 'react';
 import { useI18n } from '../../i18n';
 import { formatBytes } from '../../lib/filename';
-import { MAX_FILE_BYTES, MAX_PAGES } from '../../pdf/import';
+import { MAX_FILE_BYTES, MAX_PAGES } from '../../pdf/importBase';
 import type { DocumentController } from '../../hooks/useDocumentController';
 
 export function DocumentUpload({ controller }: { controller: DocumentController }) {

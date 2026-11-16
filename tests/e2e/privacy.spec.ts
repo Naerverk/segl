@@ -88,12 +88,10 @@ test('no document data leaves the browser and nothing is persisted', async ({ pa
   for (const v of Object.values(storage.ls)) expect(v.length).toBeLessThan(10);
   expect(storage.ss).toBe(0);
   expect(storage.cookie).toBe('');
-  // Workbox precaching may use its own IndexedDB for bookkeeping, but never app data.
-  for (const name of storage.dbs) expect(name).toMatch(/workbox/);
-  for (const u of storage.cacheUrls) {
-    expect(new URL(u).origin).toBe(origin);
-    expect(u).not.toMatch(/blob:|rich\.pdf/);
-  }
+  // No service worker or offline cache: nothing in IndexedDB or Cache Storage at all.
+  expect(storage.dbs).toEqual([]);
+  expect(storage.cacheUrls).toEqual([]);
+  expect(await page.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).length)).toBe(0);
   expect((await context.cookies()).length).toBe(0);
 });
 

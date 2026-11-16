@@ -2,7 +2,6 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import { VitePWA } from 'vite-plugin-pwa';
 import { CONTENT_SECURITY_POLICY, renderHeadersFile } from './src/config/csp.ts';
 import { BMC_FRAME_PATH, BMC_FRAME_URL_PATH, bmcSlugFromUrl, buildBmcFrame } from './src/config/bmc.ts';
 import { renderThirdPartyLicenses } from './scripts/third-party-licenses.ts';
@@ -59,39 +58,6 @@ export default defineConfig(({ mode }) => {
       react(),
       tailwindcss(),
       cspMetaPlugin(env.VITE_BUYMEACOFFEE_URL),
-      VitePWA({
-        registerType: 'prompt',
-        injectRegister: false,
-        manifest: {
-          name: 'segl.',
-          short_name: 'segl.',
-          description: 'Prepare sensitive PDFs for sharing – processed locally in your browser.',
-          lang: 'nb',
-          start_url: '.',
-          scope: '.',
-          display: 'standalone',
-          background_color: '#131416',
-          theme_color: '#131416',
-          icons: [
-            { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-            { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
-            { src: 'icons/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
-            { src: 'icons/icon.svg', sizes: 'any', type: 'image/svg+xml' },
-          ],
-        },
-        workbox: {
-          // Only the application shell and pdf.js resources are cached. User documents are never
-          // fetched over the network, so they can never end up in the cache.
-          globPatterns: ['**/*.{js,mjs,css,html,svg,png,ico,wasm,bcmap,pfb,ttf,icc,webmanifest}'],
-          maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
-          navigateFallback: 'index.html',
-          // The isolated Buy Me a Coffee frame must never be answered with the app shell.
-          navigateFallbackDenylist: [/\/bmc\//],
-          cleanupOutdatedCaches: true,
-          runtimeCaching: [],
-        },
-        devOptions: { enabled: false },
-      }),
     ],
     worker: { format: 'es' },
     build: {

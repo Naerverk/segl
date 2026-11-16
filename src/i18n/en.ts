@@ -183,11 +183,6 @@ export const en: Messages = {
   'footer.license': 'Source on GitHub (MIT)',
   'footer.newTab': '(opens in a new tab)',
 
-  'pwa.update': 'A new version of segl. is available.',
-  'pwa.reload': 'Update',
-  'pwa.dismiss': 'Later',
-  'pwa.offlineReady': 'segl. can now be used offline.',
-  'pwa.ok': 'OK',
 
   'about.title': 'About segl.',
   'about.lead': 'segl. is a small tool for making a sharing copy of a PDF – say, a copy of your driving licence for a car dealer. The most useful part is redaction: what you remove does not exist in the copy. The copy can also be marked with recipient and purpose.',
@@ -197,7 +192,6 @@ export const en: Messages = {
   'about.how.3': 'The new PDF is downloaded straight from the browser.',
   'about.how.4': 'There is no login, no database and no tracking. Once you have made a PDF, a Buy Me a Coffee button appears. It is loaded from Buy Me a Coffee but runs completely separately from your document.',
   'about.how.5': 'Nothing from the document is stored. Close it or the tab and it is gone from the app. The only thing remembered is your language.',
-  'about.how.6': 'After the first visit, the app also works offline.',
   'about.limits.title': 'What to know before you share',
   'about.limits.1': 'segl. does not make sharing safe. What you leave visible, the recipient can save, copy and pass on.',
   'about.limits.2': 'The watermark shows what the copy is meant for, but does not prevent reuse. It can be removed or covered with a bit of effort.',

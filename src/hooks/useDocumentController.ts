@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { useI18n } from '../i18n';
 import { emptyWorkspace, workspaceReducer } from '../models/workspace';
-import { ImportError, loadSourceDocument, type ImportErrorCode } from '../pdf/import';
-import { PdfSession } from '../pdf/session';
+import { ImportError, type ImportErrorCode } from '../pdf/importBase';
+import type { PdfSession } from '../pdf/session';
 import { LatestImport } from '../lib/latestImport';
 
 export interface PasswordRequest {
@@ -73,6 +73,8 @@ export function useDocumentController() {
       setStatus('loading');
       try {
         const session = await imports.open(async (signal) => {
+          // The PDF engine (PDF.js, pdf-lib) is only downloaded once a file is opened.
+          const [{ loadSourceDocument }, { PdfSession }] = await Promise.all([import('../pdf/import'), import('../pdf/session')]);
           const source = await loadSourceDocument(
             list[0],
             (reason) =>
